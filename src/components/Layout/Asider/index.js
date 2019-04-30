@@ -48,17 +48,17 @@ class Asider extends Component {
                                         <span>导航</span>
                                     </li>
                                     <li>
-                                        <a href="https://www.ihewro.com/" className="auto">
+                                        <a href="#" className="auto">
                                             <i className="iconfont icon-zhuye icon text-md"></i>
                                             <span>首页</span>
                                         </a>
                                     </li>
                                     <li><a target="_self" href="https://www.ihewro.com/project.html" className="auto"><i
                                         className="iconfont icon-fork icon text-md"></i><span>仓库</span></a></li>
-                                    <li><a target="_self" href="https://www.ihewro.com/links.html" className="auto"><i
+                                    <li><a target="_self"  className="auto"><i
                                         className="fontello fontello-emo-tongue icon text-md"></i><span>朋友</span></a>
                                     </li>
-                                    <li><a target="_self" href="https://www.ihewro.com/category/image/"
+                                    <li><a target="_self"
                                            className="auto"><i
                                         className="fontello fontello-picture icon text-md"></i><span>相册</span></a></li>
                                     <li className="line dk"></li>
