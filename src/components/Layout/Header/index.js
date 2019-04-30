@@ -1,12 +1,68 @@
 import React, {Component, Fragment} from 'react';
-import '../../../assets/css/bootstrap.min.css'
+import { CSSTransition } from 'react-transition-group';
+import '../../../assets/bootstrap/css/bootstrap.min.css'
+import { Link } from 'react-router-dom';
 import '../../../assets/css/seyma.css'
 import logo from '../../../assets/images/logo.svg';
-
+import {
+    HeaderWrapper,
+    Logo,
+    Nav,
+    NavItem,
+    SearchWrapper,
+    NavSearch,
+    SearchInfo,
+    SearchInfoTitle,
+    SearchInfoSwitch,
+    SearchInfoList,
+    SearchInfoItem,
+    Addition,
+    Button
+} from './style';
+import Music from "../Music";
 
 
 class Header extends Component{
+
+    getListArea() {
+        const { focused, list, page, totalPage, mouseIn, handleMouseEnter, handleMouseLeave, handleChangePage } = this.props;
+       // const newList = list.toJS();
+        const pageList = [];
+
+        // if (newList.length) {
+        //     for (let i = (page - 1) * 10; i < page * 10; i++) {
+        //         pageList.push(
+        //             <SearchInfoItem key={newList[i]}>{newList[i]}</SearchInfoItem>
+        //         )
+        //     }
+        // }
+
+        if (focused || mouseIn) {
+            return (
+                <SearchInfo
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
+                    <SearchInfoTitle>
+                        热门搜索
+                        <SearchInfoSwitch
+                            onClick={() => handleChangePage(page, totalPage, this.spinIcon)}
+                        >
+                            <i ref={(icon) => {this.spinIcon = icon}} className="iconfont spin">&#xe851;</i>
+                            换一批
+                        </SearchInfoSwitch>
+                    </SearchInfoTitle>
+                    <SearchInfoList>
+                        {pageList}
+                    </SearchInfoList>
+                </SearchInfo>
+            )
+        }else {
+            return null;
+        }
+    }
     render(){
+        const { focused, handleInputFocus, handleInputBlur, list, login, logout } = this.props;
         return(
             <Fragment>
                 <header id="header" className="app-header navbar" role="menu">
@@ -24,77 +80,95 @@ class Header extends Component{
                         </a>
                     </div>
                     <div className="collapse pos-rlt navbar-collapse box-shadow bg-black">
-                        <form id="searchform1" className="searchform navbar-form navbar-form-sm navbar-left shift"
-                              method="post" role="search">
-                            <div className="form-group">
-                                <div className="input-group rounded bg-light">
-                                    <input autoComplete="off" id="search_input" type="search" name="s"
-                                           className="transparent rounded form-control input-sm no-border padder"
-                                           required="" placeholder="输入关键词搜索…"/>
-                                        <ul id="search_tips_drop" className="dropdown-menu hide"
-                                            style={{display: 'block',top: 30, left: 0 }}>
-                                        </ul>
-                                        <span id="search_submit" className="transparent input-group-btn">
-<button type="submit" className="transparent btn btn-sm"><i className="fontello fontello-search" id="icon-search"></i><i
-    className="animate-spin  fontello fontello-spinner hide" id="spin-search"></i></button>
-</span>
-                                </div>
-                            </div>
-                        </form>
+                        {/*<form id="searchform1" className="searchform navbar-form navbar-form-sm navbar-left shift"*/}
+                              {/*method="post" role="search">*/}
+                            {/*<div className="form-group">*/}
+                                {/*<div className="input-group rounded bg-light">*/}
+                                    {/*<input autoComplete="off" id="search_input" type="search" name="s"*/}
+                                           {/*className="transparent rounded form-control input-sm no-border padder"*/}
+                                           {/*required="" placeholder="输入关键词搜索…"/>*/}
+                                        {/*<ul id="search_tips_drop" className="dropdown-menu hide"*/}
+                                            {/*style={{display: 'block',top: 30, left: 0 }}>*/}
+                                        {/*</ul>*/}
+                                        {/*<span id="search_submit" className="transparent input-group-btn">*/}
+{/*<button type="submit" className="transparent btn btn-sm"><i className="fontello fontello-search" id="icon-search"></i><i*/}
+    {/*className="animate-spin  fontello fontello-spinner hide" id="spin-search"></i></button>*/}
+{/*</span>*/}
+                                {/*</div>*/}
+                            {/*</div>*/}
+                        {/*</form>*/}
+                        <SearchWrapper>
+                            <CSSTransition
+                                in={focused}
+                                timeout={200}
+                                classNames="slide"
+                            >
+                                <NavSearch
+                                    className={focused ? 'focused': ''}
+                                    onFocus={() => handleInputFocus(list)}
+                                    onBlur={handleInputBlur}
+                                ></NavSearch>
+                            </CSSTransition>
+                            <i className={focused ? 'focused iconfont zoom': 'iconfont zoom'}>
+                                &#xe614;
+                            </i>
+                            {this.getListArea()}
+                        </SearchWrapper>
                         <a href="" style={{display: 'none'}} id="searchUrl"></a>
                         <ul className="nav navbar-nav navbar-right">
-                            <li className="music-box hidden-xs hidden-sm">
-                                <div id="skPlayer">
-                                    <audio className="skPlayer-source"
-                                           src="https://s320.xiami.net/177/2177/11923/146884_15922819_h.mp3?ccode=xiami_mac_&amp;expire=86400&amp;duration=260&amp;psid=9af70194d920982986dc47710241f422&amp;ups_client_netip=123.206.64.104&amp;ups_ts=1556176622&amp;ups_userid=0&amp;utid=&amp;vid=146884&amp;fn=146884_15922819_h.mp3&amp;vkey=Bdc0ba5677329d39354154633009ce365"
-                                           preload="auto" __idm_id__="232334337"></audio>
-                                    <div className="skPlayer-picture">
-                                        <img className="skPlayer-cover"
-                                             src="https://pic.xiami.net/images/album/img51/102/5885a16d30432_5129451_1485152621.jpg@1e_1c_100Q_300h_300w"
-                                             alt=""/>
+                            {/*<li className="music-box hidden-xs hidden-sm">*/}
+                                {/*<div id="skPlayer">*/}
+                                    {/*<audio className="skPlayer-source"*/}
+                                           {/*src="https://s320.xiami.net/177/2177/11923/146884_15922819_h.mp3?ccode=xiami_mac_&amp;expire=86400&amp;duration=260&amp;psid=9af70194d920982986dc47710241f422&amp;ups_client_netip=123.206.64.104&amp;ups_ts=1556176622&amp;ups_userid=0&amp;utid=&amp;vid=146884&amp;fn=146884_15922819_h.mp3&amp;vkey=Bdc0ba5677329d39354154633009ce365"*/}
+                                           {/*preload="auto" __idm_id__="232334337"></audio>*/}
+                                    {/*<div className="skPlayer-picture">*/}
+                                        {/*<img className="skPlayer-cover"*/}
+                                             {/*src="https://pic.xiami.net/images/album/img51/102/5885a16d30432_5129451_1485152621.jpg@1e_1c_100Q_300h_300w"*/}
+                                             {/*alt=""/>*/}
 
-                                    </div>
-                                    <div className="skPlayer-control">
-                                        <p className="skPlayer-name">但愿人长久</p>
-                                        <div className="playController">
-                                            <div onClick="player.prev();" className="lastMusic  music-off "><i
-                                                className="fontello fontello-angle-double-left"></i></div>
-                                            &nbsp;&nbsp;
-                                            <div className="runMusic  music-off skPlayer-play-btn"><i
-                                                className="fontello fontello-play-circle-o runMusicIcon"></i></div>
-                                            &nbsp;&nbsp;
-                                            <div onClick="player.next();" className="nextMusic  music-off "><i
-                                                className="fontello fontello-angle-double-right"></i></div>
-                                        </div>
-                                        <p className="skPlayer-author">王菲</p>
-                                        <div className="skPlayer-percent">
-                                            <div className="skPlayer-line-loading" style={{width: 31.41}}></div>
-                                            <div className="skPlayer-line lter"></div>
-                                        </div>
-                                        <p className="skPlayer-time">
-                                            <span className="skPlayer-cur">00:00</span>/<span
-                                            className="skPlayer-total">04:20</span>
-                                        </p>
-                                        <div className="skPlayer-volume">
-                                            <i className="skPlayer-icon glyphicon glyphicon-volume-up"></i>
-                                            <div className="skPlayer-percent">
-                                                <div className="skPlayer-line"></div>
-                                            </div>
-                                        </div>
-                                        <i className="skPlayer-mode"></i>
-                                    </div>
-                                    <ul className="skPlayer-list animated flipInX">
+                                    {/*</div>*/}
+                                    {/*<div className="skPlayer-control">*/}
+                                        {/*<p className="skPlayer-name">但愿人长久</p>*/}
+                                        {/*<div className="playController">*/}
+                                            {/*<div onClick="player.prev();" className="lastMusic  music-off "><i*/}
+                                                {/*className="fontello fontello-angle-double-left"></i></div>*/}
+                                            {/*&nbsp;&nbsp;*/}
+                                            {/*<div className="runMusic  music-off skPlayer-play-btn"><i*/}
+                                                {/*className="fontello fontello-play-circle-o runMusicIcon"></i></div>*/}
+                                            {/*&nbsp;&nbsp;*/}
+                                            {/*<div onClick="player.next();" className="nextMusic  music-off "><i*/}
+                                                {/*className="fontello fontello-angle-double-right"></i></div>*/}
+                                        {/*</div>*/}
+                                        {/*<p className="skPlayer-author">王菲</p>*/}
+                                        {/*<div className="skPlayer-percent">*/}
+                                            {/*<div className="skPlayer-line-loading" style={{width: 31.41}}></div>*/}
+                                            {/*<div className="skPlayer-line lter"></div>*/}
+                                        {/*</div>*/}
+                                        {/*<p className="skPlayer-time">*/}
+                                            {/*<span className="skPlayer-cur">00:00</span>/<span*/}
+                                            {/*className="skPlayer-total">04:20</span>*/}
+                                        {/*</p>*/}
+                                        {/*<div className="skPlayer-volume">*/}
+                                            {/*<i className="skPlayer-icon glyphicon glyphicon-volume-up"></i>*/}
+                                            {/*<div className="skPlayer-percent">*/}
+                                                {/*<div className="skPlayer-line"></div>*/}
+                                            {/*</div>*/}
+                                        {/*</div>*/}
+                                        {/*<i className="skPlayer-mode"></i>*/}
+                                    {/*</div>*/}
+                                    {/*<ul className="skPlayer-list animated flipInX">*/}
 
-                                        <li data-index="0" className="skPlayer-curMusic">
-                                            <i className="skPlayer-list-sign"></i>
-                                            <span className="skPlayer-list-index">1</span>
-                                            <span className="skPlayer-list-name" title="但愿人长久">但愿人长久</span>
-                                            <span className="skPlayer-list-author" title="王菲">王菲</span>
-                                        </li>
+                                        {/*<li data-index="0" className="skPlayer-curMusic">*/}
+                                            {/*<i className="skPlayer-list-sign"></i>*/}
+                                            {/*<span className="skPlayer-list-index">1</span>*/}
+                                            {/*<span className="skPlayer-list-name" title="但愿人长久">但愿人长久</span>*/}
+                                            {/*<span className="skPlayer-list-author" title="王菲">王菲</span>*/}
+                                        {/*</li>*/}
 
-                                    </ul>
-                                </div>
-                            </li>
+                                    {/*</ul>*/}
+                                {/*</div>*/}
+                            {/*</li>*/}
+                            <Music/>
                             <li className="dropdown "><a className="skPlayer-list-switch dropdown-toggle"><i
                                 className="fontello fontello-headphones"></i><span className="visible-xs-inline"></span></a>
                             </li>
@@ -164,4 +238,50 @@ class Header extends Component{
         );
     }
 }
-export default Header
+const mapStateToProps = (state) => {
+    return {
+        focused: state.getIn(['header', 'focused']),
+        list: state.getIn(['header', 'list']),
+        page: state.getIn(['header', 'page']),
+        totalPage: state.getIn(['header', 'totalPage']),
+        mouseIn: state.getIn(['header', 'mouseIn']),
+        login: state.getIn(['login', 'login'])
+    }
+}
+
+const mapDispathToProps = (dispatch) => {
+    return {
+        // handleInputFocus(list) {
+        //     (list.size === 0) && dispatch(actionCreators.getList());
+        //     dispatch(actionCreators.searchFocus());
+        // },
+        // handleInputBlur() {
+        //     dispatch(actionCreators.searchBlur());
+        // },
+        // handleMouseEnter() {
+        //     dispatch(actionCreators.mouseEnter());
+        // },
+        // handleMouseLeave() {
+        //     dispatch(actionCreators.mouseLeave());
+        // },
+        handleChangePage(page, totalPage, spin) {
+            let originAngle = spin.style.transform.replace(/[^0-9]/ig, '');
+            if (originAngle) {
+                originAngle = parseInt(originAngle, 10);
+            }else {
+                originAngle = 0;
+            }
+            spin.style.transform = 'rotate(' + (originAngle + 360) + 'deg)';
+
+        //     if (page < totalPage) {
+        //         dispatch(actionCreators.changePage(page + 1));
+        //     }else {
+        //         dispatch(actionCreators.changePage(1));
+        //     }
+        // },
+        // logout() {
+        //     dispatch(loginActionCreators.logout())
+        }
+    }
+};
+    export default Header
