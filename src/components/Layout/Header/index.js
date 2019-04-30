@@ -1,12 +1,30 @@
 import React, {Component, Fragment} from 'react';
-import '../../../assets/css/bootstrap.min.css'
+import { CSSTransition } from 'react-transition-group';
+import '../../../assets/bootstrap/css/bootstrap.min.css'
+import { Link } from 'react-router-dom';
 import '../../../assets/css/seyma.css'
 import logo from '../../../assets/images/logo.svg';
-
+import {
+    HeaderWrapper,
+    Logo,
+    Nav,
+    NavItem,
+    SearchWrapper,
+    NavSearch,
+    SearchInfo,
+    SearchInfoTitle,
+    SearchInfoSwitch,
+    SearchInfoList,
+    SearchInfoItem,
+    Addition,
+    Button
+} from './style';
+import Music from "../Music";
 
 
 class Header extends Component{
     render(){
+        const { focused, handleInputFocus, handleInputBlur, list, login, logout } = this.props;
         return(
             <Fragment>
                 <header id="header" className="app-header navbar" role="menu">
@@ -24,23 +42,40 @@ class Header extends Component{
                         </a>
                     </div>
                     <div className="collapse pos-rlt navbar-collapse box-shadow bg-black">
-                        <form id="searchform1" className="searchform navbar-form navbar-form-sm navbar-left shift"
-                              method="post" role="search">
-                            <div className="form-group">
-                                <div className="input-group rounded bg-light">
-                                    <input autoComplete="off" id="search_input" type="search" name="s"
-                                           className="transparent rounded form-control input-sm no-border padder"
-                                           required="" placeholder="输入关键词搜索…"/>
-                                        <ul id="search_tips_drop" className="dropdown-menu hide"
-                                            style={{display: 'block',top: 30, left: 0 }}>
-                                        </ul>
-                                        <span id="search_submit" className="transparent input-group-btn">
-<button type="submit" className="transparent btn btn-sm"><i className="fontello fontello-search" id="icon-search"></i><i
-    className="animate-spin  fontello fontello-spinner hide" id="spin-search"></i></button>
-</span>
-                                </div>
-                            </div>
-                        </form>
+                        {/*<form id="searchform1" className="searchform navbar-form navbar-form-sm navbar-left shift"*/}
+                              {/*method="post" role="search">*/}
+                            {/*<div className="form-group">*/}
+                                {/*<div className="input-group rounded bg-light">*/}
+                                    {/*<input autoComplete="off" id="search_input" type="search" name="s"*/}
+                                           {/*className="transparent rounded form-control input-sm no-border padder"*/}
+                                           {/*required="" placeholder="输入关键词搜索…"/>*/}
+                                        {/*<ul id="search_tips_drop" className="dropdown-menu hide"*/}
+                                            {/*style={{display: 'block',top: 30, left: 0 }}>*/}
+                                        {/*</ul>*/}
+                                        {/*<span id="search_submit" className="transparent input-group-btn">*/}
+{/*<button type="submit" className="transparent btn btn-sm"><i className="fontello fontello-search" id="icon-search"></i><i*/}
+    {/*className="animate-spin  fontello fontello-spinner hide" id="spin-search"></i></button>*/}
+{/*</span>*/}
+                                {/*</div>*/}
+                            {/*</div>*/}
+                        {/*</form>*/}
+                        <SearchWrapper>
+                            <CSSTransition
+                                in={focused}
+                                timeout={200}
+                                classNames="slide"
+                            >
+                                <NavSearch
+                                    className={focused ? 'focused': ''}
+                                    onFocus={() => handleInputFocus(list)}
+                                    onBlur={handleInputBlur}
+                                ></NavSearch>
+                            </CSSTransition>
+                            <i className={focused ? 'focused iconfont zoom': 'iconfont zoom'}>
+                                &#xe614;
+                            </i>
+                            {this.getListArea()}
+                        </SearchWrapper>
                         <a href="" style={{display: 'none'}} id="searchUrl"></a>
                         <ul className="nav navbar-nav navbar-right">
                             {/*<li className="music-box hidden-xs hidden-sm">*/}
@@ -92,10 +127,9 @@ class Header extends Component{
                                             {/*<span className="skPlayer-list-author" title="王菲">王菲</span>*/}
                                         {/*</li>*/}
 
-                                    {/*</ul>*/}
-                                {/*</div>*/}
-                            {/*</li>*/}
-
+                                    </ul>
+                                </div>
+                            </li>
                             <li className="dropdown "><a className="skPlayer-list-switch dropdown-toggle"><i
                                 className="fontello fontello-headphones"></i><span className="visible-xs-inline"></span></a>
                             </li>
@@ -165,4 +199,50 @@ class Header extends Component{
         );
     }
 }
-export default Header
+const mapStateToProps = (state) => {
+    return {
+        focused: state.getIn(['header', 'focused']),
+        list: state.getIn(['header', 'list']),
+        page: state.getIn(['header', 'page']),
+        totalPage: state.getIn(['header', 'totalPage']),
+        mouseIn: state.getIn(['header', 'mouseIn']),
+        login: state.getIn(['login', 'login'])
+    }
+}
+
+const mapDispathToProps = (dispatch) => {
+    return {
+        // handleInputFocus(list) {
+        //     (list.size === 0) && dispatch(actionCreators.getList());
+        //     dispatch(actionCreators.searchFocus());
+        // },
+        // handleInputBlur() {
+        //     dispatch(actionCreators.searchBlur());
+        // },
+        // handleMouseEnter() {
+        //     dispatch(actionCreators.mouseEnter());
+        // },
+        // handleMouseLeave() {
+        //     dispatch(actionCreators.mouseLeave());
+        // },
+        handleChangePage(page, totalPage, spin) {
+            let originAngle = spin.style.transform.replace(/[^0-9]/ig, '');
+            if (originAngle) {
+                originAngle = parseInt(originAngle, 10);
+            }else {
+                originAngle = 0;
+            }
+            spin.style.transform = 'rotate(' + (originAngle + 360) + 'deg)';
+
+        //     if (page < totalPage) {
+        //         dispatch(actionCreators.changePage(page + 1));
+        //     }else {
+        //         dispatch(actionCreators.changePage(1));
+        //     }
+        // },
+        // logout() {
+        //     dispatch(loginActionCreators.logout())
+        }
+    }
+};
+    export default Header

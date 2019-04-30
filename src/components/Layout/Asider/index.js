@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import '../../../assets/css/bootstrap.min.css'
+import '../../../assets/bootstrap/css/bootstrap.min.css'
 import '../../../assets/css/seyma.css'
 
 class Asider extends Component {
