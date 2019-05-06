@@ -1,37 +1,17 @@
-import React ,{Fragment} from 'react';
-// import ReactDOM from "react-dom";
+import React  from 'react';
 import swal from "sweetalert";
 import ReactJkMusicPlayer from "./components/Layout/Music";
 import  { FaHeadphones } from "react-icons/fa";
 import "./components/Layout/Music/styles/index.less";
 import { createRandomNum } from "./components/Layout/Music/utils";
+import axios from 'axios';
+import {  notification, message } from 'antd';
 
-import App from "./App";
 
 
 const options = {
   //audio lists model
   audioLists: [
-    {
-      name: "难得",
-      singer: "安来宁",
-      cover: "//cdn.lijinke.cn/nande.jpg",
-      musicSrc: "//cdn.lijinke.cn/nande.mp3"
-    },
-    {
-      name: "Despacito",
-      singer: "Luis Fonsi",
-      cover: "http://res.cloudinary.com/alick/image/upload/v1502689731/Despacito_uvolhp.jpg",
-      musicSrc: () => {
-        return Promise.resolve("http://res.cloudinary.com/alick/video/upload/v1502689683/Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_uyvqw9.mp3")
-      }
-    },
-    {
-      name: "Bedtime Stories",
-      singer: "Jay Chou",
-      cover: "http://res.cloudinary.com/alick/image/upload/v1502375978/bedtime_stories_bywggz.jpg",
-      musicSrc: "http://res.cloudinary.com/alick/video/upload/v1502375674/Bedtime_Stories.mp3"
-    },
     {
       name: "难得",
       singer: "安来宁",
@@ -86,10 +66,10 @@ const options = {
   },
 
   //audio controller open text  [ type `String | ReactNode` default 'open']
-  openText: "打开",
+  openText: "Aç",
 
   //audio controller close text  [ type `String | ReactNode` default 'close']
-  closeText: "关闭",
+  closeText: "kapat",
 
   //audio theme switch checkedText  [ type `String | ReactNode` default '-']
   checkedText: "开",
@@ -192,7 +172,11 @@ const options = {
 
   //The single song is ended handle
   onAudioEnded(audioInfo) {
-    swal("Audio is ended!", "", "success");
+    notification['info']({
+      message: 'Notification',
+      description: 'audio ended.',
+    });
+    // swal("Audio is ended!", "", "success");
     console.log("audio ended", audioInfo);
   },
 
@@ -203,22 +187,30 @@ const options = {
 
   //audio play progress handle
   onAudioProgress(audioInfo) {
+
     // console.log('audio progress',audioInfo);
   },
 
   //audio reload handle
   onAudioReload(audioInfo) {
+
     console.log("audio reload:", audioInfo);
   },
 
   //audio load failed error handle
   onAudioLoadError(e) {
-    swal("audio load error", "", "error");
+    // notification.open({
+    //   message: 'audio load error',
+    //   description: e,
+    // });
+    // swal("audio load error", "", "error");
     console.log("audio load err", e);
   },
 
   //theme change handle
   onThemeChange(theme) {
+    message.config({top: 120})
+    message.info('theme chang');
     console.log("theme change:", theme);
   },
 
@@ -238,10 +230,14 @@ const options = {
   },
 
   onPlayModeChange(playMode) {
+    message.config({top: 120})
+    message.info('play mode change: '+ playMode.value);
     console.log("play mode change:", playMode);
   },
 
   onModeChange(mode) {
+    // message.config({top: 120})
+    // message.info('play mode change: '+ mode);
     console.log("mode change:", mode);
   },
 
@@ -261,8 +257,26 @@ class Music extends React.PureComponent {
   state = {
     params: options
   };
+  componentDidMount() {
+   this.onAddAudio()
+    // axios.get(url).then((res)=> {
+    //    console.log(res.data.data)
+    //   this.setState({
+    //     params: res.data.data,
+    //   })
+    // })
+    // console.log( ...this.state.params.options.audioLists)
+    // this.setState(
+    //     {  params:options.audioLists=[{
+    //       name: "I'm new here",
+    //       singer: "jack",
+    //       cover: "http://www.lijinke.cn/music/1387583682387727.jpg",
+    //       musicSrc: `http://www.lijinke.cn/music/${Date.now()}.mp3`
+    //     }]}
+    // )
+  }
   onAddAudio = () => {
-    const data = {
+    let data = {
       ...this.state.params,
       audioLists: [
         ...this.state.params.audioLists,
@@ -274,9 +288,20 @@ class Music extends React.PureComponent {
         }
       ]
     };
-    this.setState({
-      params: data
-    });
+    var url="http://localhost:9090/music/getList"
+    axios.get(url).then((res)=> {
+      console.log('res' + res)
+      data.audioLists = [... res.data.data]
+      console.log(data)
+      this.setState({
+        params: data
+      })
+      console.log('data' + data.audioLists)
+    })
+    console.log('data' + data.audioLists)
+    // this.setState({
+    //   params: data
+    // });
   };
   extendsContent = () => {
     const data = {
@@ -334,6 +359,8 @@ class Music extends React.PureComponent {
       params: data
     });
   };
+
+
   render() {
     const { params } = this.state;
     return (

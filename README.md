@@ -67,3 +67,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 ![avatar](./index.png)
+// "start": "node scripts/start.js",
+    start": "react-app-rewired start
+    "build": "node scripts/build.js",
+    "test": "node scripts/test.js"

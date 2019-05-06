@@ -52,7 +52,7 @@ export const SearchWrapper = styled.div`
 		right: 5px;
 		bottom: 5px;
 		width: 20px;
-		line-height: 30px;
+		line-height: 20px;
 		border-radius: 15px;
 		text-align: center;
 		&.focused {
@@ -122,8 +122,9 @@ export const SearchInfoSwitch = styled.span`
 	.spin {
 		display: block;
 		float: left;
-		font-size: 12px;
+		font-size: 14px;
 		margin-right: 2px;
+		margin-top: 3px;
 		transition: all .2s ease-in;
 		transform-origin: center center;
 	}

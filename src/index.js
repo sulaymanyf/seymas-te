@@ -4,8 +4,14 @@ import './assets/css/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Music from "./music";
+import  './assets/iconfont/iconfont';
+import './assets/css/seyma.css'
+import SiderDemo from './components/Admin'
 
-// ReactDOM.render(<App />, document.getElementById('root'));
+
+ReactDOM.render(<App />, document.getElementById('root'));
+// ReactDOM.render(<SiderDemo />, document.getElementById('admin'));
+
 ReactDOM.render(<Music />, document.getElementById("music"));
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

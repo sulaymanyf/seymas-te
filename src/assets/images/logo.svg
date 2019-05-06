@@ -1,11 +1,7 @@
-
-<svg width="580" height="400" xmlns="http://www.w3.org/2000/svg">
-    <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
-
-    <g>
-        <title>Layer 1</title>
-        <text stroke="#00ffff" transform="matrix(9.284613392455137,0,0,16.23081473329193,-1702.8915776669596,-2233.1238328028003) " xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="10" id="svg_1" y="153.599395" x="185.369166" stroke-width="0" fill="#ff0000">Şeyma Ye</text>
-        <path d="m269.5,182.770828c0,0 -0.662506,-0.310013 1,-3c0.7435,-1.203003 4,-4 6,-7l0,-1" id="svg_3" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="none"/>
-        <path stroke="#000" id="svg_4" d="m447.432429,20.370003l0,29.586477c-54.287829,4.152488 -97.048439,48.178298 -97.048439,101.877518c0,-9.67341 11.816889,-17.530106 26.368617,-17.530106c14.560248,0 26.377137,7.856696 26.377137,17.530106c0,-9.67341 11.808369,-17.530106 26.368617,-17.530106c6.926554,0 13.222648,1.840307 17.934068,4.74233l0,144.251771c0,6.452872 -3.782768,11.678873 -8.43455,11.678873c-4.660302,0 -8.443069,-5.226001 -8.443069,-11.678873l0,-5.851233l-16.877619,0l0,5.851233c0,19.358616 11.348303,35.072008 25.320688,35.072008s25.312169,-15.713392 25.312169,-35.072008l0,-144.251771c4.71142,-2.91382 11.016033,-4.74233 17.942587,-4.74233c14.543208,0 26.377137,7.856696 26.377137,17.530106c0,-9.67341 11.816889,-17.530106 26.360098,-17.530106c14.577287,0 26.394177,7.856696 26.394177,17.530106c0,-53.687423 -42.76913,-97.713234 -97.065479,-101.877518l0,-29.586477l-16.886139,0z" stroke-opacity="null" stroke-width="0" fill="#bf0000"/>
-    </g>
+<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <g>
+  <title>Layer 1</title>
+  <text stroke="#000000" transform="matrix(5.8297952000168,0,0,12.158053837114016,-833.3891986978523,-1989.2848353377985) " xml:space="preserve" text-anchor="middle" font-family="Sans-serif" font-size="24" id="svg_1" y="191.32562" x="197.88517" stroke-width="0" fill="#823131">Şeyma Ye</text>
+ </g>
 </svg>

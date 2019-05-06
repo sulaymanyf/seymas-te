@@ -1,19 +1,30 @@
-import React ,{Fragment} from 'react';
+import React ,{Component ,Fragment} from 'react';
 // import logo from './assets/images/logo.svg';
 import './assets/css/App.css';
 import Header from "./components/Layout/Header";
 import Asider from "./components/Layout/Asider";
-
-
+import {GlobalStyled} from "./style";
+import './assets/bootstrap/css/bootstrap.min.css'
+import { Provider } from 'react-redux';
+import store from './store';
+import Home from "./components/Home";
 
 
 function App() {
   return (
-      <Fragment>
-        <Header/>
-        <Asider/>
+      <Provider store={store}>
+          <Fragment>
 
-      </Fragment>
+              <GlobalStyled/>
+
+                <Header/>
+                <Asider/>
+
+                <Home/>
+
+          </Fragment>
+
+      </Provider>
   );
 }
 
