@@ -2,35 +2,30 @@ import React, { Component,Fragment } from 'react';
 
 class Footer extends Component {
 
-	    render() {
+    render() {
         return (
             <Fragment>
-					 <div id="left_footer" className="footer wrapper-xs text-center nav-xs lt">
-                            <div className="col-xs-4 no-padder">
-                                <a target="_blank" className="tinav" href="https://www.ihewro.com/admin/" title=""
-                                   data-toggle="tooltip" data-placement="top" data-original-title="后台管理">
-                                    <span className="block"><i className="fontello fontello-cogs"></i></span>
-                                    <small className="text-muted">管理</small>
-                                </a>
-                            </div>
-                            <div className="col-xs-4 no-padder">
-                                <a target="_blank" className="tinav" href="https://www.ihewro.com/feed/" title=""
-                                   data-toggle="tooltip" data-placement="top" data-original-title="文章RSS地址">
-                                    <span className="block"><i className="fontello fontello-rss"></i></span>
-                                    <small className="text-muted">文章</small>
-                                </a>
-                            </div>
-                            <div className="col-xs-4 no-padder">
-                                <a target="_blank" href="https://www.ihewro.com/feed/comments/" title=""
-                                   data-toggle="tooltip" data-placement="top" data-original-title="评论RSS地址">
-                                    <span className="block"><i className="fontello fontello-rss-square"></i></span>
-                                    <small className="text-muted">评论</small>
-                                </a>
-                            </div>
-					 </div>
+                <footer id="footer" className="app-footer" role="footer">
+                    <div className="wrapper b-t bg-light">
+                        <span className="pull-right hidden-xs text-ellipsis">
+                        <a href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备17006801号</a> Powered by <a target="blank"
+                                                                                                                href="http://www.typecho.org">Typecho</a>&nbsp;|&nbsp;Theme by <a
+                            target="blank" href="https://www.ihewro.com/archives/489/">handsome</a>
+                        </span>
+                                    <span className="text-ellipsis">©&nbsp;2019 Copyright&nbsp;<a target="_blank"
+                                                                                              href="https://www.upyun.com/index.html"><img
+                                        src="https://www.ihewro.com/usr/uploads/sina/5cc11bd82ba27.jpg"
+                                        style={{width: 50}}/></a></span>
+                                </div>
+                                <div className="topButton panel panel-default">
+                                    <button id="goToTop" className="btn btn-default no-shadow pos-abt">
+                                        <i className="fontello fontello-chevron-circle-up" aria-hidden="true"></i>
+                                    </button>
+                    </div>
+                </footer>
             </Fragment>
-        );
+);
 
-    }
+}
 }
 export default Footer;

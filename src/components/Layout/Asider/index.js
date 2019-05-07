@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import '../../../assets/bootstrap/css/bootstrap.min.css'
 import '../../../assets/css/seyma.css'
-import Footer from "../Footer";
+import FootMen from "../FootMuen";
 import NavBar from "../Nav";
 
 class Asider extends Component {
@@ -12,6 +12,7 @@ class Asider extends Component {
                     <div className="aside-wrap" layout="column">
                         <div className="navi-wrap scroll-y" flex="">
                             <div className="clearfix hidden-xs text-center hide  show" id="aside-user">
+
                                 <div className="dropdown wrapper">
                                     <div ui-nav="">
                                         <a href="https://www.ihewro.com/cross.html">
@@ -43,11 +44,9 @@ class Asider extends Component {
                                     </ul>
                                 </div>
                             </div>
-
+                            <NavBar/>
                         </div>
-                        <NavBar/>
-                        <Footer/>
-
+                        <FootMen/>
                     </div>
                 </aside>
             </Fragment>
